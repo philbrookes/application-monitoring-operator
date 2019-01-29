@@ -2,3 +2,100 @@ apiVersion: applicationmonitoring.integreatly.org/v1alpha1
 kind: ApplicationMonitoring
 metadata:
   name: example-applicationmonitoring
+spec:
+  alert_channels:
+    - name: email
+      type: email
+      severity: 0
+      settings:
+        to: noc@redhat.com
+        send_resolved: false
+        from: alerts@redhat.com
+        smtp_smarthost: mail.relay.com
+        hello: HELLO
+        auth_username: user
+        auth_password: pass
+        auth_secret: secret
+        auth_identity: string
+        require_tls: false
+        tls_config:
+          ca_file: /path/to/ca.file
+          cert_file: /path/to/cert.file
+          key_file: /path/to/key.file
+          server_name: server_name
+          insecure_skip_verify: false
+        html: template html body
+        text: template text body
+        headers: { header, header2, }
+    - name: chat
+      type: pushover
+      severity: 1
+      settings:
+        send_resolved: false
+        user_key: secret
+        token: secret
+        title: template string
+        message: template string
+        url: template string
+        priority: '{{ if eq .Status "firing" }}2{{ else }}0{{ end }}'
+        retry: 1m
+        expire: 1h
+        http_config:
+          basic_auth:
+            username: user
+            password: password
+            password_file: /path/to/password.file
+          bearer_token: token
+          bearer_token_file: /path/to/bearer/token.file
+          tls_config:
+            ca_file: /path/to/ca.file
+            cert_file: /path/to/cert.file
+            key_file: /path/to/key.file
+            server_name: server_name
+            insecure_skip_verify: false
+          proxy_url: http://proxy
+    - name: pagerduty
+      type: pagerduty
+      severity: 2
+      settings:
+        send_resolved: true
+        service_key: service key
+        url: https://api.pagerduty.com
+        client:  client id
+        client_url:  http://client
+        description: template string
+        severity: 'error'
+        details: >-
+          {
+             firing:       '{{ template "pagerduty.default.instances" .Alerts.Firing }}'
+             resolved:     '{{ template "pagerduty.default.instances" .Alerts.Resolved }}'
+             num_firing:   '{{ .Alerts.Firing | len }}'
+             num_resolved: '{{ .Alerts.Resolved | len }}'
+          }
+        images:
+          - source: http://image1
+            alt: image 1
+            text: image 1
+          - source: http://image2
+            alt: image 2
+            text: image 2
+        links:
+          - href: http://link1
+            text: link 1
+          - href: http://link2
+            text: link 2
+        http_config:
+          basic_auth:
+            username: user
+            password: password
+            password_file: /path/to/password.file
+          bearer_token: token
+          bearer_token_file: /path/to/bearer/token.file
+          tls_config:
+            ca_file: /path/to/ca.file
+            cert_file: /path/to/cert.file
+            key_file: /path/to/key.file
+            server_name: server_name
+            insecure_skip_verify: false
+          proxy_url: http://proxy
+

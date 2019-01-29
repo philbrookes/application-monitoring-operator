@@ -11,3 +11,121 @@ spec:
     singular: applicationmonitoring
   scope: Namespaced
   version: v1alpha1
+  validation:
+    openAPIV3Schema:
+      properties:
+        spec:
+          properties:
+            alert_channels:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  type:
+                    type: string
+                  severity:
+                    type: integer
+                  settings:
+                    type: object
+                    properties:
+                      send_resolved:
+                        type: boolean
+                      to:
+                        type: string
+                      from:
+                        type: string
+                      smtp_smarthost:
+                        type: string
+                      hello:
+                        type: string
+                      auth_username:
+                        type: string
+                      auth_password:
+                        type: string
+                      auth_secret:
+                        type: string
+                      auth_identity:
+                        type: string
+                      require_tls:
+                        type: boolean
+                      user_key:
+                        type: string
+                      token:
+                        type: string
+                      title:
+                        type: string
+                      message:
+                        type: string
+                      url:
+                        type: string
+                      priority:
+                        type: string
+                      retry:
+                        type: string
+                      expire:
+                        type: string
+                      proxy_url:
+                        type: string
+                      service_key:
+                        type: string
+                      client:
+                        type: string
+                      client_url:
+                        type: string
+                      description:
+                        type: string
+                      severity:
+                        type: string
+                      details:
+                        type: string
+                      images:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            source:
+                              type: string
+                            alt:
+                              type: string
+                            text:
+                              type: string
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            href:
+                              type: string
+                            text:
+                              type: string
+                      tls_config:
+                        type: object
+                        properties:
+                          ca_file:
+                            type: string
+                          cert_file:
+                            type: string
+                          key_file:
+                            type: string
+                          server_name:
+                            type: string
+                          insecure_skip_verify:
+                            type: boolean
+                      http_config:
+                        type: object
+                        properties:
+                          basic_auth:
+                            type: object
+                            properties:
+                              username:
+                                type: string
+                              password:
+                                type: string
+                              password_file:
+                                type: string
+                          bearer_token:
+                            type: string
+                          bearer_token_file:
+                            type: string

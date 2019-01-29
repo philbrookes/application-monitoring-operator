@@ -1,0 +1,23 @@
+- name: '{{ receiver_name }}'
+  email_configs:
+  - send_resolved: {{ send_resolved }}
+    to: '{{ to }}'
+    from: '{{ from }}'
+    smarthost: '{{ smarthost }}'
+    hello: '{{ hello }}'
+  	auth_username: '{{ auth_username }}'
+    auth_password: '{{ auth_password }}'
+    auth_secret: '{{ auth_secret }}'
+    auth_identity: '{{ auth_identity }}'
+    require_tls: {{ require_tls }}
+  	tls_config:
+		ca_file: '{{ ca_file }}'
+		cert_file: '{{ cert_file }}'
+		key_file: '{{ key_file }}'
+		server_name: '{{ server_name }}'
+		insecure_skip_verify: {{ insecure_skip_verify }}
+    html: '{{ html }}'
+    text: '{{ test }}'
+    headers: {{ headers }}
+
+
